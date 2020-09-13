@@ -17,6 +17,7 @@ export default async (req, res) => {
       path: obj1.files.file.path.replace(/public/g, '.'),
       title: obj1.files.file.name,
     };
+    res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(result));
   });
 };

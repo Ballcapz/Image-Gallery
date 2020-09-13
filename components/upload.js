@@ -24,23 +24,8 @@ export default function Upload() {
   };
 
   const onFormChange = (e) => {
-    const file = e.target.files[0];
-    if (isValidImage(file)) {
-      setFile(file);
-      setError('');
-    }
-  };
-
-  const isValidImage = (file) => {
-    const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-    console.log(typeof file.name);
-    debugger;
-    if (!allowedExtensions.exec(file.name)) {
-      setError('Please upload an jpg/jpeg, png, or gif image');
-      return false;
-    }
-
-    return true;
+    setFile(e.target.files[0]);
+    setError('');
   };
 
   const fileUpload = (file) => {
