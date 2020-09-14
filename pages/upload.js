@@ -1,5 +1,6 @@
 import { post } from 'axios';
 import { useState } from 'react';
+import Header from '../components/header';
 
 import styles from '../styles/Upload.module.css';
 
@@ -64,6 +65,7 @@ export default function Upload() {
 
   return (
     <>
+      <Header />
       <form className={styles.form} onSubmit={onFormSubmit}>
         <h1>Upload an image and change it's opacity</h1>
         <input type="file" name="file" id="file" className={styles.upload} onChange={onFormChange} />
