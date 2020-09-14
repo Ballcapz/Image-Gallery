@@ -11,13 +11,13 @@ export default async (req, res) => {
   form.uploadDir = './public/UploadedImages';
   form.keepExtensions = true;
   form.parse(req, (err, fields, files) => {
-    let obj1 = { files };
+    let fileObject = { files };
 
     const result = {
-      path: obj1.files.file.path.replace(/public/g, '.'),
-      title: obj1.files.file.name,
+      path: fileObject.files.file.path.replace(/public/g, '.'),
+      title: fileObject.files.file.name,
     };
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(result));
+    res.end(JSON.stringify(result));
   });
 };
