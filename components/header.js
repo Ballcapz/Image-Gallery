@@ -1,20 +1,21 @@
 import Link from 'next/link';
+import styles from './Header.module.css';
 
 export default function Header() {
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav className={styles.nav}>
+      <ul className={styles.navLinks}>
+        <li className={styles.navItem}>
           <Link href="/">
             <a>Home</a>
           </Link>
         </li>
-        <li>
+        <li className={styles.navItem}>
           <Link href="/upload">
             <a>Upload</a>
           </Link>
         </li>
-        <li>
+        <li className={styles.navItem}>
           <Link href="/gallery">
             <a>Gallery</a>
           </Link>

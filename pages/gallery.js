@@ -1,19 +1,20 @@
 import { getImagePaths } from '../lib/images';
 import Header from '../components/header';
+import styles from '../styles/Gallery.module.css';
 
 export default function Gallery({ imagePaths }) {
   return (
     <>
       <Header />
-      <ul>
+      <section className={styles.imageList}>
         {imagePaths.map((imagePath) => {
           return (
-            <li>
-              <img style={{ height: '50px', width: 'auto' }} src={`/UploadedImages/${imagePath}`} alt="picture!" />
-            </li>
+            <figure className={styles.figure}>
+              <img className={styles.image} src={`/UploadedImages/${imagePath}`} alt="picture!" />
+            </figure>
           );
         })}
-      </ul>
+      </section>
     </>
   );
 }

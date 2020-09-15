@@ -1,0 +1,22 @@
+.nav {
+  height: min(50px, 10vh);
+  width: max(290px, 100vw);
+}
+
+.navLinks {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  width: 100%;
+}
+
+.navItem {
+  margin-right: 1.4rem;
+  font-size: 1.25rem;
+  color: #333333;
+}
+
+.navItem:hover {
+  color: #222222;
+}
