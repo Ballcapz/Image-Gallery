@@ -1,4 +1,5 @@
 import formidable from 'formidable';
+import { join } from 'path';
 
 export const config = {
   api: {
@@ -9,7 +10,7 @@ export const config = {
 export default async (req, res) => {
   return new Promise((resolve, reject) => {
     const form = new formidable.IncomingForm();
-    form.uploadDir = './public/UploadedImages' || './UploadedImages';
+    form.uploadDir = join(process.cwd(), 'public', 'UploadedImages');
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
       let fileObject = { files };
