@@ -58,6 +58,23 @@ export default function Upload({ apiUrl }) {
     document.documentElement.style.setProperty('--opacity', e.target.value);
   };
 
+  const saveOpacity = (e) => {
+    e.preventDefault();
+
+    const lastSlash = workingImage.lastIndexOf('/');
+    const imageName = workingImage.substr(lastSlash + 1);
+
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    axios.post(`${apiUrl}/${imageName}/${opacity}`, {}, config).then((res) => {
+      console.log(res.data);
+    });
+  };
+
   return (
     <>
       <Header />
@@ -93,6 +110,7 @@ export default function Upload({ apiUrl }) {
           <figure className={styles.figure}>
             <img className={styles.image} src={workingImage} />
           </figure>
+          <button onClick={saveOpacity}>Save Opacity</button>
         </section>
       )}
     </>
