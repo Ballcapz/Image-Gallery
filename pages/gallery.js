@@ -20,15 +20,14 @@ export default function Gallery({ apiUrl }) {
         <section className={styles.imageList}>
           {images.map((image) => {
             return (
-              <>
-                <figure className={styles.figure} key={image.name}>
-                  <img
-                    className={styles.image}
-                    src={`https://imageupload22.blob.core.windows.net/images/${image.name}`}
-                    alt={image.name}
-                  />
-                </figure>
-              </>
+              <figure className={styles.figure} key={image.image.name}>
+                <img
+                  className={styles.image}
+                  style={{ filter: `opacity(${image.opacity})` }}
+                  src={`https://imageupload22.blob.core.windows.net/images/${image.image.name}`}
+                  alt={image.name}
+                />
+              </figure>
             );
           })}
         </section>

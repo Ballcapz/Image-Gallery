@@ -29,6 +29,7 @@ export default function Upload({ apiUrl }) {
       console.log(res.data);
       setWorkingImage(res.data.filename);
       setFile();
+      setOpacity(1);
     });
   };
 
@@ -106,11 +107,14 @@ export default function Upload({ apiUrl }) {
               step="0.05"
               value={opacity}
             />
+            <button onClick={saveOpacity} className={styles.submit}>
+              Save Opacity
+            </button>
           </section>
+
           <figure className={styles.figure}>
             <img className={styles.image} src={workingImage} />
           </figure>
-          <button onClick={saveOpacity}>Save Opacity</button>
         </section>
       )}
     </>
