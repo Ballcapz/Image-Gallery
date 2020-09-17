@@ -1,30 +1,47 @@
-import { getImagePaths } from '../lib/images';
 import Header from '../components/header';
 import styles from '../styles/Gallery.module.css';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-export default function Gallery({ imagePaths }) {
+export default function Gallery({ apiUrl }) {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios.get(apiUrl).then((res) => {
+      console.log(res.data);
+      setImages(res.data);
+    });
+  }, []);
+
   return (
     <>
       <Header />
-      <section className={styles.imageList}>
-        {imagePaths.map((imagePath) => {
-          return (
-            <figure className={styles.figure}>
-              <img className={styles.image} src={`/UploadedImages/${imagePath}`} alt="picture!" />
-            </figure>
-          );
-        })}
-      </section>
+      {images.length > 0 && (
+        <section className={styles.imageList}>
+          {images.map((image) => {
+            return (
+              <>
+                <figure className={styles.figure} key={image.name}>
+                  <img
+                    className={styles.image}
+                    src={`https://imageupload22.blob.core.windows.net/images/${image.name}`}
+                    alt={image.name}
+                  />
+                </figure>
+              </>
+            );
+          })}
+        </section>
+      )}
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const imagePaths = getImagePaths();
-
+  const apiUrl = process.env.API_URL;
   return {
     props: {
-      imagePaths,
+      apiUrl,
     },
   };
 }

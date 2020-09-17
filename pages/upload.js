@@ -1,13 +1,12 @@
-import { post } from 'axios';
+import axios from 'axios';
 import { useState } from 'react';
 import Header from '../components/header';
 
 import styles from '../styles/Upload.module.css';
 
-export default function Upload() {
+export default function Upload({ apiUrl }) {
   const [file, setFile] = useState();
   const [workingImage, setWorkingImage] = useState('');
-  const [imageTitle, setImageTitle] = useState('');
   const [error, setError] = useState('');
   const [opacity, setOpacity] = useState(1.0);
 
@@ -17,9 +16,18 @@ export default function Upload() {
       setError('Please Upload an Image File');
       return;
     }
-    fileUpload(file).then((response) => {
-      setWorkingImage(response.data.path);
-      setImageTitle(response.data.title);
+
+    const formData = new FormData();
+    formData.append('image', file);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+
+    axios.post(apiUrl, formData, config).then((res) => {
+      console.log(res.data);
+      setWorkingImage(res.data.filename);
       setFile();
     });
   };
@@ -41,19 +49,6 @@ export default function Upload() {
     }
 
     return true;
-  };
-
-  const fileUpload = (file) => {
-    const url = `${window.location.origin}/api/upload-file`;
-    const formData = new FormData();
-    formData.append('file', file);
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-
-    return post(url, formData, config);
   };
 
   const handleUpdate = (e) => {
@@ -81,7 +76,7 @@ export default function Upload() {
 
       {workingImage !== '' && (
         <section className={styles.imageContainer}>
-          <h2 className={styles.title}>Uploaded Image: {imageTitle}</h2>
+          <h2 className={styles.title}>Uploaded Image</h2>
           <section className={styles.control}>
             <label htmlFor="opacity">Change Opacity: </label>
             <input
@@ -102,4 +97,9 @@ export default function Upload() {
       )}
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const apiUrl = process.env.API_URL;
+  return { props: { apiUrl } };
 }
