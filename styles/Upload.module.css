@@ -81,6 +81,11 @@
   margin-right: 0.4rem;
 }
 
+.opacityValue {
+  width: 100%;
+  text-align: center;
+}
+
 .figure {
   margin: 1rem auto;
   box-sizing: border-box;
@@ -104,5 +109,11 @@
   display: block;
   margin: 1rem;
   color: #e70000;
+  font-weight: 500;
+}
+
+.saved {
+  margin-left: 1rem;
+  color: #60bc96;
   font-weight: 500;
 }

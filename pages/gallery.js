@@ -8,7 +8,6 @@ export default function Gallery({ apiUrl }) {
 
   useEffect(() => {
     axios.get(apiUrl).then((res) => {
-      console.log(res.data);
       setImages(res.data);
     });
   }, []);
