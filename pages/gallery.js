@@ -1,4 +1,5 @@
 import Header from '../components/header';
+import Head from 'next/head';
 import styles from '../styles/Gallery.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -14,6 +15,9 @@ export default function Gallery({ apiUrl }) {
 
   return (
     <>
+      <Head>
+        <title>Image Gallery</title>
+      </Head>
       <Header />
       {images.length > 0 && (
         <section className={styles.imageList}>
